@@ -15,7 +15,13 @@ namespace contactos.Models
         [StringLength(100, ErrorMessage= "El valor para {0} debe contener al menos {2} y maximo {1} caracteres", MinimumLength=6)]
         [DataType(DataType.Password)]
         [Display(Name="Password")]
-        
         public string password {get; set;}
+        public string email {get; set;}
+
+        [DataType(DataType.Date)]
+        public DateTime FechaCreado {get; set;}
+
+
+
     }
 }
