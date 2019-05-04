@@ -10,5 +10,6 @@ namespace contactos.Models
 
             }
             public DbSet<Contacto> Contacto {get; set;}
+            public DbSet<Usuario> Usuario {get; set;}
     }
 }

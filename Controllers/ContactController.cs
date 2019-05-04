@@ -6,6 +6,8 @@ using contactos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace contactos.Controllers
 {
     [Route("api/v1/[controller]")]
@@ -21,6 +23,7 @@ namespace contactos.Controllers
 
         // Devuelve todos los datos
         [HttpGet]
+        [Authorize]
         public IEnumerable<Contacto> getAll()
         {
             return _context.Contacto.ToList();
@@ -29,6 +32,7 @@ namespace contactos.Controllers
 
         // Devuelve un rgistro por id
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Contacto>> GetById(long id)
         {
             var item = await _context.Contacto.FindAsync(id);
@@ -41,7 +45,7 @@ namespace contactos.Controllers
 
 
         // Metodo Post
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<Contacto>> Create([FromBody] Contacto item)
         {
             if (item == null)
