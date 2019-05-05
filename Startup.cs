@@ -20,6 +20,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
+// Servicios
+using contactos.Services;
+
 namespace contactos
 {
     public class Startup
@@ -50,6 +53,10 @@ namespace contactos
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:key"]))
                     };
                 });
+
+            services.AddScoped<IUserService, UserServices>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -53,6 +53,21 @@ namespace contactos.Controllers
                 return BadRequest();
             }
 
+            var currentUser = HttpContext.User;
+            int years = 0;
+
+            if (currentUser.HasClaim(c => c.Type == "FechaCreado"))
+            {
+                DateTime date = DateTime.Parse(currentUser.Claims.FirstOrDefault(c => c.Type == "FechaCreado").Value);
+                years = DateTime.Today.Year - date.Year;
+            }
+
+            if (years < 2)
+            {
+                return Forbid();
+            }
+
+
             _context.Contacto.Add(item);
             await _context.SaveChangesAsync();
 
